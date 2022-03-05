@@ -1,6 +1,6 @@
 This is intended as a quick reference and showcase. For more complete info, see [John Gruber's original spec](http://daringfireball.net/projects/markdown/) and the [Github-flavored Markdown info page](http://github.github.com/github-flavored-markdown/).
 
-Note that there is also a [Cheatsheet specific to Markdown Here](./Markdown-Here-Cheatsheet) if that's what you're looking for. You can also check out [more Markdown tools](./Other-Markdown-Tools).
+You can also check out [more Markdown tools](./Other-Markdown-Tools).
 
 ##### Table of Contents  
 [Headers](#headers)  
@@ -8,15 +8,15 @@ Note that there is also a [Cheatsheet specific to Markdown Here](./Markdown-Here
 [Lists](#lists)  
 [Links](#links)  
 [Images](#images)  
+[Hyperlinked Images](#hyperlinked-images)  
 [Code and Syntax Highlighting](#code)  
+[TOC (Table of Contents)](#toc-table-of-contents)
 [Tables](#tables)  
 [Blockquotes](#blockquotes)  
 [Inline HTML](#html)  
 [Horizontal Rule](#hr)  
 [Line Breaks](#lines)  
 [YouTube Videos](#videos)  
-
-<a name="headers"/>
 
 ## Headers
 
@@ -103,7 +103,7 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 1. First ordered list item
 2. Another item
   * Unordered sub-list. 
-1. Actual numbers don't matter, just that it's a number
+3. Actual numbers don't matter, just that it's a number
   1. Ordered sub-list
 4. And another item.
 
@@ -121,55 +121,25 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 
 ## Links
 
-There are two ways to create links. 
+There are two ways to create links. The more ideal way is shown over here.
 
 ```no-highlight
-[I'm an inline-style link](https://www.google.com)
+[This is an inline-style link](https://www.google.com)
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[This is an inline-style link with title](https://www.google.com "Google's Homepage")
 
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
+[This is a reference-style link][Arbitrary case-insensitive reference text]
 
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or <http://www.example.com> and sometimes 
-example.com (but not on Github, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
+[This is a relative reference to a repository file](../blob/master/LICENSE)
 ```
 
-[I'm an inline-style link](https://www.google.com)
+[This is an inline-style link](https://www.google.com)
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[This is an inline-style link with title](https://www.google.com "Google's Homepage")
 
-[I'm a reference-style link][Arbitrary case-insensitive reference text]
+[This is a reference-style link][Arbitrary case-insensitive reference text]
 
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
-
-[You can use numbers for reference-style link definitions][1]
-
-Or leave it empty and use the [link text itself].
-
-URLs and URLs in angle brackets will automatically get turned into links. 
-http://www.example.com or <http://www.example.com> and sometimes 
-example.com (but not on Github, for example).
-
-Some text to show that the reference links can follow later.
-
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
-
-<a name="images"/>
+[This is a relative reference to a repository file](../blob/master/LICENSE)
 
 ## Images
 
@@ -195,11 +165,19 @@ Reference-style:
 
 [logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 
-<a name="code"/>
+## Hyperlinked Images
+
+Instead of having text as a hyperlink, we can make images hyperlinks in the following way:
+```html
+<a href="google.com">
+  <img src="images/google.svg" width="70" height="70"/>
+</a>
+```
+Note that `target` attribute of `<a>` element  with value `target="_blank"`, which is the attribute value for opening the hyperlink in a new tab, doesn't work in GFM ([Github Flavored Markdown](https://github.github.com/gfm/)) and most markdown renderers.
 
 ## Code and Syntax Highlighting
 
-Code blocks are part of the Markdown spec, but syntax highlighting isn't. However, many renderers -- like Github's and *Markdown Here* -- support syntax highlighting. Which languages are supported and how those language names should be written will vary from renderer to renderer. *Markdown Here* supports highlighting for dozens of languages (and not-really-languages, like diffs and HTTP headers); to see the complete list, and how to write the language names, see the [highlight.js demo page](http://softwaremaniacs.org/media/soft/highlight/test.html).
+Code blocks are part of the Markdown spec, but syntax highlighting isn't. However, many renderers -- like Github's support syntax highlighting. Which languages are supported and how those language names should be written will vary from renderer to renderer.
 
 ```no-highlight
 Inline `code` has `back-ticks around` it.
@@ -207,47 +185,39 @@ Inline `code` has `back-ticks around` it.
 
 Inline `code` has `back-ticks around` it.
 
-Blocks of code are either fenced by lines with three back-ticks <code>```</code>, or are indented with four spaces. I recommend only using the fenced code blocks -- they're easier and only they support syntax highlighting.
+Blocks of code are fenced by either lines with three back-ticks <code>```</code> or three tildes `~~~`.
 
-<pre lang="no-highlight"><code>```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
+There are two options for fencing code-blocks since, in case back-ticks are to be displayed within a code-block, the back-ticks to be displayed aren't matched with the back-ticks indicating the starting and ending of the code block.
  
-```python
-s = "Python syntax highlighting"
-print s
-```
- 
-```
-No language indicated, so no syntax highlighting. 
-But let's throw in a &lt;b&gt;tag&lt;/b&gt;.
-```
-</code></pre>
+ It is recommended to only use the fenced code blocks -- they're easier and only they support **syntax highlighting**.
+SYNTAX:
+~~~
+```<language-name>
 
-
-
-```javascript
-var s = "JavaScript syntax highlighting";
-alert(s);
-```
-
-```python
-s = "Python syntax highlighting"
-print s
-```
+...<code-block>...
 
 ```
-No language indicated, so no syntax highlighting in Markdown Here (varies on Github). 
-But let's throw in a <b>tag</b>.
+~~~
+For example, for the source code: 
+~~~
+```console
+rohan@ubuntu:~$ 
 ```
+~~~
+The output would be formatted like this:
+```console
+rohan@ubuntu:~$ 
+```
+In place of `<language-name>`, we can also write `python`, `javascript`, `no-highlight` and more.
 
+## TOC (Table of Contents)
 
-<a name="tables"/>
+The TOC contains all the headlines of the respective markdown file.
+It can be created manually using hyperlinks and nested unordered lists or it can be auto generated using VS-Code extensions like [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) or online generators like [this](https://ecotrust-canada.github.io/markdown-toc/) one.
 
 ## Tables
 
-Tables aren't part of the core Markdown spec, but they are part of GFM and *Markdown Here* supports them. They are an easy way of adding tables to your email -- a task that would otherwise require copy-pasting from another application.
+Tables aren't part of the core Markdown spec, but they are part of GFM ([Github Flavored Markdown](https://github.github.com/gfm/)). They are an easy way of adding tables to your email -- a task that would otherwise require copy-pasting from another application.
 
 ```no-highlight
 Colons can be used to align columns.
@@ -303,8 +273,6 @@ Quote break.
 
 > This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote. 
 
-<a name="html"/>
-
 ## Inline HTML
 
 You can also use raw HTML in your Markdown, and it'll mostly work pretty well. 
@@ -326,8 +294,6 @@ You can also use raw HTML in your Markdown, and it'll mostly work pretty well.
   <dt>Markdown in HTML</dt>
   <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
 </dl>
-
-<a name="hr"/>
 
 ## Horizontal Rule
 
@@ -387,8 +353,6 @@ This line is only separated by a single newline, so it's a separate line in the 
 
 (Technical note: *Markdown Here* uses GFM line breaks, so there's no need to use MD's two-space line breaks.)
 
-<a name="videos"/>
-
 ## YouTube Videos
 
 They can't be added directly but you can add an image with a link to the video like this:
@@ -398,15 +362,5 @@ They can't be added directly but you can add an image with a link to the video l
 " target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 ```
-
-Or, in pure Markdown, but losing the image sizing and border:
-
-```no-highlight
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
-```
-
-Referencing a bug by #bugID in your git commit links it to the slip. For example #1. 
-
----
 
 License: [CC-BY](https://creativecommons.org/licenses/by/3.0/)
